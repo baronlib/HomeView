@@ -2,12 +2,15 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SolarSourceService } from '../services/solar-source.service';
 import { TestSolarSourceService } from '../services/test-solar-source.service';
 import { Observable } from 'rxjs-compat';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @Component({
   selector: 'solar-view',
   template: `
   <ng-content></ng-content>
-  <div>{{power | number : '1.2'}}</div>`,
+  <mat-progress-bar [value]="power">{{power}}</mat-progress-bar>
+  `,  
+  //<div>{{power | number : '1.2'}}</div>
   styleUrls: ['./solar-view.component.css'],
   providers: [
     { provide: SolarSourceService, useClass: TestSolarSourceService }
@@ -20,9 +23,11 @@ export class SolarViewComponent implements OnInit, OnDestroy {
   private powerObservable: Observable<number>;
 
   constructor(private solarService: SolarSourceService) {
+
     this.powerObservable = Observable.timer(0, 2000).map(
       () => this.power = this.solarService.currentPower()
     );
+
   }
 
   ngOnInit() {

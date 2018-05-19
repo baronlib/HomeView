@@ -12,6 +12,6 @@ export class TestSolarSourceService implements SolarSourceService  {
 
   currentPower(): number {
 
-    return Math.random();
+    return Math.random()*100;
   }
 }

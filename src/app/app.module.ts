@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { SolarViewComponent } from './solar-view/solar-view.component';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 @NgModule({
   declarations: [
@@ -10,7 +11,8 @@ import { SolarViewComponent } from './solar-view/solar-view.component';
     SolarViewComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

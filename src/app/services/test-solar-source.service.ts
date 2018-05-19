@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Observable, timer } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { SolarSourceService } from './solar-source.service';
+
+import { Observable, Subscription } from 'rxjs-compat';
 
 @Injectable({
   providedIn: 'root'
@@ -10,10 +10,8 @@ export class TestSolarSourceService implements SolarSourceService  {
 
   constructor() { }
 
-  currentPower(): Observable<number> {
+  currentPower(): number {
 
-    return timer(0, 2000);//.map((n) => return 2000.0);
-    
-    //map((n) => 2000.0);
+    return Math.random();
   }
 }

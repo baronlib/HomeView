@@ -19,7 +19,12 @@ export class SolarViewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.solarService.currentPower().subscribe((p)=> this.power = p);
+    this.solarService.currentPower().subscribe(
+      (p)=> 
+      {
+        this.power = p;
+      }
+    );
   }
 
   // TODO - unsubscribe

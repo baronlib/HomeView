@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { SolarViewComponent } from './solar-view/solar-view.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
   ],
   imports: [
     BrowserModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

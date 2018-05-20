@@ -8,5 +8,5 @@ export abstract class SolarSourceService {
 
   constructor() { }
 
-  abstract currentPower(): number;
+  abstract currentPower(): Observable<number>;
 }

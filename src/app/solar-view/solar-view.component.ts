@@ -4,13 +4,16 @@ import { Observable } from 'rxjs-compat';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FroniusSolarSourceService } from '../services/fronius-solar-source.service';
 
-const maxPower: number = 5100;
-
 @Component({
   selector: 'solar-view',
   template: `
-  <div>{{power}} W</div>
+  <div>{{solarService.currentPower | async}} W</div>
   <mat-progress-bar [value]="powerAsPercent"></mat-progress-bar>
+  <p align="right">{{maxPower}} W</p>
+
+  <div>{{solarService.dayEnergy | async}} Wh</div>
+  <mat-progress-bar [value]="dayEnergyAsPercent"></mat-progress-bar>
+  <p align="right">{{maxDayEnergy}} Wh</p>
   `,  
   //<div>{{power | number : '1.2'}}</div>
   styleUrls: ['./solar-view.component.css'],
@@ -18,32 +21,29 @@ const maxPower: number = 5100;
     { provide: SolarSourceService, useClass: FroniusSolarSourceService }
   ]
 })
-export class SolarViewComponent implements OnInit, OnDestroy {
+export class SolarViewComponent {
   
-  private power: number;
+  private maxPower: number = 5100; // In Watts
+  private maxDayEnergy: number = 25000; // In Watt Hours
+
   private powerAsPercent: number;
-  private error: boolean;
+  private dayEnergyAsPercent: number;
+  //private error: boolean;
 
   constructor(private solarService: SolarSourceService) {
-  }
 
-  ngOnInit() {
-    this.solarService.currentPower().subscribe((power)=> 
+    this.solarService.currentPower.subscribe((power) =>
     {
-      this.power = power;
-      this.CalculatePowerAsPercent();
-    },
-    (error) => 
+      this.powerAsPercent = this.ValueAsPercent(power);
+    });
+
+    this.solarService.dayEnergy.subscribe((dayEnergy) =>
     {
-    this.power = -1;}
-    );
+      this.dayEnergyAsPercent = this.ValueAsPercent(dayEnergy);
+    });
   }
 
-  ngOnDestroy(): void {
-    // TODO - unsubscribe ?
-  }
-
-  CalculatePowerAsPercent(): void{
-    this.powerAsPercent = (this.power / maxPower) * 100.0;
+  ValueAsPercent(power: number): number{
+    return (power / this.maxPower) * 100.0;
   }
 }

@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Subject } from 'rxjs-compat';
 
 @Injectable({
   providedIn: 'root'
 })
 export abstract class SolarSourceService {
 
-  constructor() { }
+  // Currently generated Power in Watts
+  public currentPower: Subject<number>;
 
-  // Returns an observable that emits the
-  // current power in Watts
-  abstract currentPower(): Observable<number>;
+  // Total energy generated today
+  public dayEnergy: Subject<number>;
+
+  constructor() { }
 }

@@ -8,11 +8,11 @@ import { FroniusSolarSourceService } from '../services/fronius-solar-source.serv
   selector: 'solar-view',
   template: `
   <div>{{solarService.currentPower | async}} W</div>
-  <mat-progress-bar [value]="powerAsPercent"></mat-progress-bar>
+  <mat-progress-bar [value]="powerAsPercent" color='warn'></mat-progress-bar>
   <p align="right">{{maxPower}} W</p>
 
   <div>{{solarService.dayEnergy | async}} Wh</div>
-  <mat-progress-bar [value]="dayEnergyAsPercent"></mat-progress-bar>
+  <mat-progress-bar [value]="dayEnergyAsPercent" color='warn'></mat-progress-bar>
   <p align="right">{{maxDayEnergy}} Wh</p>
   `,  
   //<div>{{power | number : '1.2'}}</div>

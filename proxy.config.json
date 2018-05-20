@@ -1,0 +1,7 @@
+  {
+    "/inverter/*": {
+      "target": "http://10.1.1.234:80",
+      "secure": false,
+      "pathRewrite": {"^/inverter" : ""}
+    }
+  }

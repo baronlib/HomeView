@@ -4,11 +4,13 @@ import { Observable } from 'rxjs-compat';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FroniusSolarSourceService } from '../services/fronius-solar-source.service';
 
+const maxPower: number = 5100;
+
 @Component({
   selector: 'solar-view',
   template: `
-  <ng-content></ng-content>
-  <mat-progress-bar [value]="power">{{power}}</mat-progress-bar>
+  <div>{{power}} W</div>
+  <mat-progress-bar [value]="powerAsPercent"></mat-progress-bar>
   `,  
   //<div>{{power | number : '1.2'}}</div>
   styleUrls: ['./solar-view.component.css'],
@@ -17,7 +19,9 @@ import { FroniusSolarSourceService } from '../services/fronius-solar-source.serv
   ]
 })
 export class SolarViewComponent implements OnInit, OnDestroy {
+  
   private power: number;
+  private powerAsPercent: number;
   private error: boolean;
 
   constructor(private solarService: SolarSourceService) {
@@ -27,11 +31,19 @@ export class SolarViewComponent implements OnInit, OnDestroy {
     this.solarService.currentPower().subscribe((power)=> 
     {
       this.power = power;
+      this.CalculatePowerAsPercent();
     },
-    (error) => this.power = -1);
+    (error) => 
+    {
+    this.power = -1;}
+    );
   }
 
   ngOnDestroy(): void {
     // TODO - unsubscribe ?
+  }
+
+  CalculatePowerAsPercent(): void{
+    this.powerAsPercent = (this.power / maxPower) * 100.0;
   }
 }

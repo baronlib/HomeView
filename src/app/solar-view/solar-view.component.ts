@@ -3,17 +3,16 @@ import { SolarSourceService } from '../services/solar-source.service';
 import { Observable } from 'rxjs-compat';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { FroniusSolarSourceService } from '../services/fronius-solar-source.service';
+import { ParameterSource } from '../model/parameter-source.model';
+import { Parameter } from '../model/parameter.model';
 
 @Component({
   selector: 'solar-view',
   template: `
-  <div>{{solarService.currentPower | async}} W</div>
+  <div>Current Power: {{solarService.currentPower | async}} W</div>
   <mat-progress-bar [value]="powerAsPercent" color='warn'></mat-progress-bar>
-  <p align="right">{{maxPower}} W</p>
-
-  <div>{{solarService.dayEnergy | async}} Wh</div>
+  <div>Daily Energy : {{solarService.dayEnergy | async | number}} Wh</div>
   <mat-progress-bar [value]="dayEnergyAsPercent" color='warn'></mat-progress-bar>
-  <p align="right">{{maxDayEnergy}} Wh</p>
   `,  
   //<div>{{power | number : '1.2'}}</div>
   styleUrls: ['./solar-view.component.css'],
@@ -24,26 +23,38 @@ import { FroniusSolarSourceService } from '../services/fronius-solar-source.serv
 export class SolarViewComponent {
   
   private maxPower: number = 5100; // In Watts
-  private maxDayEnergy: number = 25000; // In Watt Hours
+  private maxDayEnergy: number = 30000; // In Watt Hours
 
   private powerAsPercent: number;
   private dayEnergyAsPercent: number;
   //private error: boolean;
 
-  constructor(private solarService: SolarSourceService) {
+  // TODO - refactor to pass in a instance that encapsulates either Power or DayEnergy
 
-    this.solarService.currentPower.subscribe((power) =>
-    {
-      this.powerAsPercent = this.ValueAsPercent(power);
-    });
+ // constructor(private solarService: SolarSourceService) {
 
-    this.solarService.dayEnergy.subscribe((dayEnergy) =>
-    {
-      this.dayEnergyAsPercent = this.ValueAsPercent(dayEnergy);
-    });
+ private parameters: Parameter[];
+
+    // todo
+constructor(private parameterSources: ParameterSource[])
+{
+  this.parameters = new Array<Parameter>();
+
+  parameterSources.forEach((ps) => ps.getParameters().forEach((param)=> {this.parameters.push(param);}));
+
+
+    // this.solarService.currentPower.subscribe((power) =>
+    // {
+    //   this.powerAsPercent = this.ValueAsPercent(power, this.maxDayEnergy);
+    // });
+
+    // this.solarService.dayEnergy.subscribe((dayEnergy) =>
+    // {
+    //   this.dayEnergyAsPercent = this.ValueAsPercent(dayEnergy, this.maxDayEnergy);
+    // });
   }
 
-  ValueAsPercent(power: number): number{
-    return (power / this.maxPower) * 100.0;
+  ValueAsPercent(value: number, max: number): number{
+    return (value / max) * 100.0;
   }
 }

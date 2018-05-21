@@ -4,7 +4,7 @@ import { Subject } from 'rxjs-compat';
 @Injectable({
   providedIn: 'root'
 })
-export abstract class SolarSourceService {
+export abstract class SolarSourceService implements ParameterSource {
 
   // Currently generated Power in Watts
   public currentPower: Subject<number>;

@@ -5,11 +5,13 @@ import { AppComponent } from './app.component';
 import { SolarViewComponent } from './solar-view/solar-view.component';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HttpClientModule } from '@angular/common/http';
+import { ParameterViewComponent } from './parameter-view/parameter-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SolarViewComponent
+    SolarViewComponent,
+    ParameterViewComponent
   ],
   imports: [
     BrowserModule,

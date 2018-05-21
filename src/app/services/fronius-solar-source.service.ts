@@ -37,4 +37,9 @@ export class FroniusSolarSourceService implements SolarSourceService {
           }
         );
   }
+
+  
+  getParameters(): Parameter[] {
+    throw new Error("Method not implemented.");
+  }
 }

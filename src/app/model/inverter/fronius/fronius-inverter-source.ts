@@ -8,8 +8,6 @@ const pollTime: number = 2000; // Poll time in milliseconds
 
 export class FroniusInverterSource extends InverterParameterSource {
 
-  private inverterDataObservable: Observable<Fronius.FroniusInverterData>;
-
   constructor(private http: HttpClient)
   {
     super();

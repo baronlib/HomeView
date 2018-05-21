@@ -2,6 +2,7 @@ import { Injectable, OnInit } from '@angular/core';
 import { SolarSourceService } from './solar-source.service';
 import { Observable, Subject } from 'rxjs-compat';
 import { HttpClient } from "@angular/common/http";
+import { Parameter } from '../model/parameter.model';
 
 const url: string = "/inverter/solar_api/v1/GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=CommonInverterData";
 const pollTime: number = 2000; // Poll time in milliseconds
@@ -37,7 +38,6 @@ export class FroniusSolarSourceService implements SolarSourceService {
           }
         );
   }
-
   
   getParameters(): Parameter[] {
     throw new Error("Method not implemented.");

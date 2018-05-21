@@ -13,5 +13,8 @@ export class Parameter
 
     public maxValue: number;
 
-           
+    constructor() {
+        
+        this.value = new Subject<number>();
+    }
 }

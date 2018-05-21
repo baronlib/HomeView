@@ -1,30 +1,29 @@
 import { Injectable, OnInit } from '@angular/core';
-import { SolarSourceService } from './solar-source.service';
 import { Observable, Subject } from 'rxjs-compat';
 import { HttpClient } from "@angular/common/http";
-import { Parameter } from '../model/parameter.model';
+import { InverterParameterSource } from '../inverter-source';
 
 const url: string = "/inverter/solar_api/v1/GetInverterRealtimeData.cgi?Scope=Device&DeviceId=1&DataCollection=CommonInverterData";
 const pollTime: number = 2000; // Poll time in milliseconds
 
-@Injectable({
-  providedIn: 'root'
-})
-export class FroniusSolarSourceService implements SolarSourceService {
-
-  public currentPower: Subject<number>;
-  public dayEnergy: Subject<number>;
+export class FroniusInverterSource extends InverterParameterSource {
 
   private inverterDataObservable: Observable<Fronius.FroniusInverterData>;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient)
+  {
+    super();
 
-    this.currentPower = new Subject<number>();
-    this.dayEnergy = new Subject<number>();
+    this.currentPower.minValue=  0.0;
+    this.currentPower.maxValue = 5300.0;
+
+    this.dayEnergy.minValue = 0.0;
+    this.dayEnergy.maxValue = 25000;
 
     // Poll the interver every set ms
     Observable.timer(0, pollTime).subscribe(
-          (n)=> {
+          (n)=>
+          {
             this.http.get<Fronius.FroniusInverterData>(url).subscribe((data) =>
             {
               let power: number = 0.0;
@@ -32,14 +31,10 @@ export class FroniusSolarSourceService implements SolarSourceService {
               {
                 power = data.Body.Data.PAC.Value;
               }
-              this.currentPower.next(power);
-              this.dayEnergy.next(data.Body.Data.DAY_ENERGY.Value);
+              this.currentPower.value.next(power);
+              this.dayEnergy.value.next(data.Body.Data.DAY_ENERGY.Value);
             });
           }
         );
-  }
-  
-  getParameters(): Parameter[] {
-    throw new Error("Method not implemented.");
   }
 }

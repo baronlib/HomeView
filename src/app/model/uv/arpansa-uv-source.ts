@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 
 const url: string = "uv/api/UV";
 // Every two minutes
-const pollTime: number = 1000;//120000; // Poll time in milliseconds
+const pollTime: number = 120000; // Poll time in milliseconds
 
 export class ArpansaUvSource extends UvSource{
 

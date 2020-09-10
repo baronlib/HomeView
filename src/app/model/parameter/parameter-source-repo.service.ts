@@ -18,7 +18,8 @@ export class ParameterSourceRepoService {
 
         this.parameterSources.push(new FroniusInverterSource(this.http));
         this.parameterSources.push(new ArpansaUvSource(this.http));
-        this.parameterSources.push(new WeatherSource());
+        // Nice to have!
+        // this.parameterSources.push(new WeatherSource());
     }
 
     getAllParameterSources(): ParameterSource[]{

@@ -12,6 +12,8 @@ export abstract class UvSource implements ParameterSource {
         this.uvIndex.unit = "";
         this.uvIndex.minValue = 0;
         this.uvIndex.maxValue = 15;
+
+        // TODO - colour
     }
 
     getParameters(): Parameter[] {

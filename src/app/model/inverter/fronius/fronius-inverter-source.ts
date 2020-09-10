@@ -15,8 +15,8 @@ export class FroniusInverterSource extends InverterParameterSource {
     this.currentPower.minValue=  0.0;
     this.currentPower.maxValue = 5300.0;
 
-    this.dayEnergy.minValue = 0.0;
-    this.dayEnergy.maxValue = 25000;
+    // this.dayEnergy.minValue = 0.0;
+    // this.dayEnergy.maxValue = 25000;
 
     // Poll the interver every set ms
     Observable.timer(0, pollTime).subscribe(

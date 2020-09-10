@@ -7,14 +7,14 @@ export abstract class InverterParameterSource implements ParameterSource {
 
   public getParameters(): Parameter[]
   {
-    return new Array<Parameter>(this.currentPower, this.dayEnergy);
+    return new Array<Parameter>(this.currentPower);//, this.dayEnergy);
   }
   
   // Currently generated Power in Watts
   protected currentPower: Parameter;
 
   // Total energy generated today
-  protected dayEnergy: Parameter;
+  //protected dayEnergy: Parameter;
 
   constructor() {
 
@@ -22,9 +22,9 @@ export abstract class InverterParameterSource implements ParameterSource {
     this.currentPower.name = "Power";
     this.currentPower.unit = "W";
 
-    this.dayEnergy = new Parameter();
-    this.dayEnergy.name = "Energy";
-    this.dayEnergy.unit = "Wh";
+    // this.dayEnergy = new Parameter();
+    // this.dayEnergy.name = "Energy";
+    // this.dayEnergy.unit = "Wh";
     
    }
 }

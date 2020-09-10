@@ -15,10 +15,13 @@ export class ArpansaUvSource extends UvSource{
         Observable.timer(0, pollTime).subscribe(
             (n)=>
             {
-              this.http.get<number>(url).subscribe((index) =>
-              {
-                this.uvIndex.value.next(index);
-              });
+              // Test
+              this.uvIndex.value.next(Math.floor(Math.random()* 15));
+
+              // this.http.get<number>(url).subscribe((index) =>
+              // {
+              //   this.uvIndex.value.next(index);
+              // });
             }
           );            
     }

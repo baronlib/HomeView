@@ -1,14 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Parameter } from '../model/parameter/parameter.model';
+import {TooltipModule} from 'primeng/tooltip';
 
 @Component({
   selector: 'parameter-view',
-  template: `
-  <div>{{parameter.name}}: {{parameter.value | async | number}} {{parameter.unit}}</div>
-  <mat-progress-bar [value]="valueAsPercent" color='warn'></mat-progress-bar>  
-  `
-  ,
-  styleUrls: ['./parameter-view.component.css']
+  templateUrl: "./parameter-view.component.html"
 })
 export class ParameterViewComponent implements OnInit {
 

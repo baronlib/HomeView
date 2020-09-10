@@ -6,9 +6,7 @@ import { FroniusInverterSource } from '../inverter/fronius/fronius-inverter-sour
 import { ArpansaUvSource } from '../uv/arpansa-uv-source';
 import { WeatherSource } from '../weather/forecast-source';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 
 export class ParameterSourceRepoService {
 

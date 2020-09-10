@@ -6,6 +6,7 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { HttpClientModule } from '@angular/common/http';
 import { ParameterViewComponent } from './components/parameter-view.component';
 import { DashboardComponent } from './components/dashboard.component';
+import { ParameterSourceRepoService } from './model/parameter/parameter-source-repo.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,7 @@ import { DashboardComponent } from './components/dashboard.component';
     MatProgressBarModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ParameterSourceRepoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

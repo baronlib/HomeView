@@ -22,16 +22,18 @@ export class FroniusInverterSource extends InverterParameterSource {
     Observable.timer(0, pollTime).subscribe(
           (n)=>
           {
-            this.http.get<Fronius.FroniusInverterData>(url).subscribe((data) =>
-            {
-              let power: number = 0.0;
-              if(data.Body.Data.PAC)
-              {
-                power = data.Body.Data.PAC.Value;
-              }
-              this.currentPower.value.next(power);
-              this.dayEnergy.value.next(data.Body.Data.DAY_ENERGY.Value);
-            });
+            // Test
+            this.currentPower.value.next(Math.random()* 4000);
+            // this.http.get<Fronius.FroniusInverterData>(url).subscribe((data) =>
+            // {
+            //   let power: number = 0.0;
+            //   if(data.Body.Data.PAC)
+            //   {
+            //     power = data.Body.Data.PAC.Value;
+            //   }
+            //   this.currentPower.value.next(power);
+            //   this.dayEnergy.value.next(data.Body.Data.DAY_ENERGY.Value);
+            // });
           }
         );
   }

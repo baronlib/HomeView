@@ -6,13 +6,7 @@ import { Parameter } from '../model/parameter/parameter.model';
 
 @Component({
   selector: 'dashboard',
-  template: `
-  <parameter-view *ngFor="let param of parameters" [parameter]="param"></parameter-view>
-  `,
-  styleUrls: ['./dashboard.component.css'],
-  providers: [
-    { provide: ParameterSourceRepoService, useClass: ParameterSourceRepoService }
-  ]
+  templateUrl: 'dashboard.component.html'
 })
 export class DashboardComponent 
 {

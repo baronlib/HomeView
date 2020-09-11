@@ -20,4 +20,8 @@ export class CameraViewComponent
 
     this.cameras = this.cameraService.getCameras();
   }
+
+  changeCamera(){
+      alert('change');
+  }
 }

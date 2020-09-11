@@ -1,1 +1,2 @@
-<img *ngFor="let camera of cameras" [src]="camera.FeedUrl">
+<img style="width:100%;z-index:-1" *ngFor="let camera of cameras" [src]="camera.FeedUrl">
+<button class="btn btn-primary" *ngFor="let camera of cameras" (click)="changeCamera()">{{camera.Description}}</button>
